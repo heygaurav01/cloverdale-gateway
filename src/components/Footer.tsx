@@ -8,15 +8,12 @@ const Footer = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
             {/* About Column */}
             <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="bg-gradient-gold p-2 rounded-lg">
-                  <div className="w-8 h-8 flex items-center justify-center text-white font-bold text-xl">
-                    SC
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold font-serif">Signature Cloverdale</h3>
-                </div>
+              <div className="mb-6">
+                <img 
+                  src="https://www.signatureglobalcloverdales.com/assets/img/logo.svg" 
+                  alt="Signature Cloverdale Logo"
+                  className="h-16 brightness-0 invert"
+                />
               </div>
               <p className="text-white/70 mb-6">
                 A lavish residential elevation nestled in Sector 71, Gurugram, offering 

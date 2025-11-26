@@ -1,9 +1,26 @@
 import { useState, useEffect } from "react";
-import { ChevronDown, Star, Building2, Calendar, MapPin } from "lucide-react";
+import { ChevronDown, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useToast } from "@/hooks/use-toast";
 
 const Hero = () => {
+  const { toast } = useToast();
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [formData, setFormData] = useState({
+    name: "",
+    countryCode: "+91",
+    phone: "",
+    email: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   const heroImages = [
     "https://www.signatureglobalcloverdales.com/assets/img/desk_ban_1.webp",
@@ -17,8 +34,32 @@ const Hero = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const scrollToContact = () => {
-    document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!formData.name || !formData.phone) {
+      toast({
+        title: "Required fields missing",
+        description: "Please fill in your name and phone number",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    
+    setTimeout(() => {
+      toast({
+        title: "Registration Successful!",
+        description: "Our team will contact you shortly with exclusive offers.",
+      });
+      setFormData({ name: "", countryCode: "+91", phone: "", email: "" });
+      setIsSubmitting(false);
+    }, 1000);
+  };
+
+  const scrollDown = () => {
+    document.querySelector("#overview")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -41,81 +82,165 @@ const Hero = () => {
       ))}
 
       {/* Content */}
-      <div className="relative h-full container mx-auto px-4 flex flex-col justify-center items-center text-center z-10">
-        {/* Limited Time Badge */}
-        <div className="animate-fade-in-up mb-6">
-          <div className="inline-flex items-center gap-2 bg-primary/20 backdrop-blur-sm border border-primary/30 text-white px-6 py-3 rounded-full font-semibold">
-            <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-            Booking Open: Limited Time Only
-          </div>
-        </div>
+      <div className="relative h-full container mx-auto px-4 z-10">
+        <div className="grid lg:grid-cols-2 gap-8 h-full items-center py-24">
+          {/* Left Side - Hero Content */}
+          <div className="text-white animate-fade-in-up">
+            {/* Limited Time Badge */}
+            <div className="mb-6">
+              <div className="inline-flex items-center gap-2 bg-primary/20 backdrop-blur-sm border border-primary/30 px-6 py-3 rounded-full font-semibold">
+                <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+                Booking Open: Limited Time Only
+              </div>
+            </div>
 
-        {/* Main Title */}
-        <h1 className="hero-title animate-fade-in-up mb-4" style={{ animationDelay: "0.1s" }}>
-          Signature Cloverdale
-        </h1>
-        
-        <p className="hero-subtitle animate-fade-in-up mb-8" style={{ animationDelay: "0.2s" }}>
-          At Sector 71, Gurugram by Signature Global Builder
-        </p>
+            {/* Main Title */}
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4 font-serif">
+              Signature Cloverdale
+            </h1>
+            
+            <p className="text-xl md:text-2xl mb-6 text-white/90">
+              At Sector 71, Gurugram by Signature Global Builder
+            </p>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 mb-8 animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
-          <div className="stat-badge bg-card/80 backdrop-blur-sm">
-            <Star className="w-5 h-5 text-primary fill-primary" />
-            <div className="text-left">
-              <div className="font-bold text-foreground">4.9 Stars</div>
-              <div className="text-xs text-muted-foreground">178 Reviews</div>
+            {/* Key Features */}
+            <div className="space-y-3 mb-8 text-lg">
+              <div className="flex items-center gap-3">
+                <div className="w-1.5 h-1.5 bg-primary rounded-full" />
+                <span>50 Acres - Premium Farmhouses</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-1.5 h-1.5 bg-primary rounded-full" />
+                <span>Luxurious 3, 3.5 & 4.5 BHK Apartments</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-1.5 h-1.5 bg-primary rounded-full" />
+                <span>G+35 Floors with World-Class Amenities</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-1.5 h-1.5 bg-primary rounded-full" />
+                <span>₹10 Lakh Booking, Balance on Possession</span>
+              </div>
+            </div>
+
+            {/* Price CTA */}
+            <div className="mb-8 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 inline-block">
+              <p className="text-3xl md:text-4xl font-bold">
+                Starting at <span className="text-primary">₹3.95 Cr</span> Onwards
+              </p>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a href="tel:+912246182371">
+                <Button size="lg" className="btn-gold text-lg px-8 py-6 gap-2 w-full sm:w-auto">
+                  <Phone className="w-5 h-5" />
+                  +91 22 4618 2371
+                </Button>
+              </a>
+              <a href="https://wa.me/912246182371" target="_blank" rel="noopener noreferrer">
+                <Button 
+                  size="lg" 
+                  className="bg-[#25D366] hover:bg-[#20BA5A] text-white text-lg px-8 py-6 gap-2 w-full sm:w-auto"
+                >
+                  WhatsApp
+                </Button>
+              </a>
             </div>
           </div>
-          <div className="stat-badge bg-card/80 backdrop-blur-sm">
-            <MapPin className="w-5 h-5 text-primary" />
-            <div className="text-left">
-              <div className="font-bold text-foreground">8 Acres</div>
-              <div className="text-xs text-muted-foreground">Land Parcel</div>
-            </div>
-          </div>
-          <div className="stat-badge bg-card/80 backdrop-blur-sm">
-            <Building2 className="w-5 h-5 text-primary" />
-            <div className="text-left">
-              <div className="font-bold text-foreground">G+35 Floors</div>
-              <div className="text-xs text-muted-foreground">6 Towers</div>
-            </div>
-          </div>
-          <div className="stat-badge bg-card/80 backdrop-blur-sm">
-            <Calendar className="w-5 h-5 text-primary" />
-            <div className="text-left">
-              <div className="font-bold text-foreground">May 2031</div>
-              <div className="text-xs text-muted-foreground">Possession</div>
-            </div>
-          </div>
-        </div>
 
-        {/* Price & CTA */}
-        <div className="animate-fade-in-up mb-8" style={{ animationDelay: "0.4s" }}>
-          <p className="text-white text-2xl mb-2">Luxurious 3, 3.5 & 4.5 BHK</p>
-          <p className="text-white text-5xl font-bold mb-6">
-            Starts from <span className="text-primary">₹ 3.95 Cr</span> Onwards
-          </p>
-        </div>
+          {/* Right Side - Floating Form Card */}
+          <div className="animate-fade-in-up lg:flex justify-end items-center" style={{ animationDelay: "0.3s" }}>
+            <div className="bg-card rounded-2xl shadow-2xl p-8 max-w-md w-full">
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2 text-center font-serif">
+                Register for Exclusive Offers
+              </h2>
+              <p className="text-muted-foreground text-center mb-6">
+                Get best deals and pricing details
+              </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style={{ animationDelay: "0.5s" }}>
-          <Button size="lg" className="btn-gold text-lg px-10 py-6" onClick={scrollToContact}>
-            Enquire Now
-          </Button>
-          <Button size="lg" variant="outline" className="btn-outline-gold text-lg px-10 py-6 bg-white/10 backdrop-blur-sm border-white text-white hover:bg-white hover:text-foreground">
-            Download Brochure
-          </Button>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <Input
+                    type="text"
+                    placeholder="Name *"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="h-12 border-border/50 text-base"
+                    required
+                  />
+                </div>
+
+                <div className="grid grid-cols-3 gap-2">
+                  <Select
+                    value={formData.countryCode}
+                    onValueChange={(value) => setFormData({ ...formData, countryCode: value })}
+                  >
+                    <SelectTrigger className="h-12 border-border/50">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="+91">🇮🇳 +91</SelectItem>
+                      <SelectItem value="+1">🇺🇸 +1</SelectItem>
+                      <SelectItem value="+44">🇬🇧 +44</SelectItem>
+                      <SelectItem value="+971">🇦🇪 +971</SelectItem>
+                      <SelectItem value="+65">🇸🇬 +65</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Input
+                    type="tel"
+                    placeholder="Mobile No *"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    className="h-12 border-border/50 col-span-2 text-base"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <Input
+                    type="email"
+                    placeholder="E-Mail Address (Optional)"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="h-12 border-border/50 text-base"
+                  />
+                </div>
+
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full h-12 text-base font-semibold bg-gradient-gold hover:opacity-90 transition-opacity"
+                >
+                  {isSubmitting ? "Submitting..." : "Register Now"}
+                </Button>
+
+                <p className="text-xs text-muted-foreground text-center">
+                  I authorize company representatives to call, SMS, email or WhatsApp me about its products and offers.
+                </p>
+              </form>
+
+              <div className="mt-6 text-center">
+                <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">
+                  <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+                  Booking Open • 50:50 Payment Plan
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div 
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce cursor-pointer"
+          onClick={scrollDown}
+        >
           <ChevronDown className="w-8 h-8 text-white" />
         </div>
       </div>
 
       {/* Slide Indicators */}
-      <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
+      <div className="absolute bottom-24 left-8 flex gap-2 z-20">
         {heroImages.map((_, index) => (
           <button
             key={index}

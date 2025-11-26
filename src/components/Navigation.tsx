@@ -41,15 +41,11 @@ const Navigation = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <div className="bg-gradient-gold p-2 rounded-lg">
-              <div className="w-8 h-8 flex items-center justify-center text-white font-bold text-xl">
-                SC
-              </div>
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-foreground">Signature Cloverdale</h1>
-              <p className="text-xs text-muted-foreground">Sector 71, Gurugram</p>
-            </div>
+            <img 
+              src="https://www.signatureglobalcloverdales.com/assets/img/logo.svg" 
+              alt="Signature Cloverdale Logo"
+              className="h-12 md:h-14"
+            />
           </div>
 
           {/* Desktop Navigation */}
