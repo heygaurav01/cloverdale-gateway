@@ -9,14 +9,14 @@ const Footer = () => {
             {/* About Column */}
             <div>
               <div className="mb-6">
-                <img 
-                  src="https://www.signatureglobalcloverdales.com/assets/img/logo.svg" 
+                <img
+                  src="https://www.signatureglobalcloverdales.com/assets/img/logo.svg"
                   alt="Signature Cloverdale Logo"
                   className="h-16 brightness-0 invert"
                 />
               </div>
               <p className="text-white/70 mb-6">
-                A lavish residential elevation nestled in Sector 71, Gurugram, offering 
+                A lavish residential elevation nestled in Sector 71, Gurugram, offering
                 luxurious 3, 3.5 & 4.5 BHK apartments with world-class amenities.
               </p>
               <div className="flex gap-4">
@@ -85,12 +85,12 @@ const Footer = () => {
                 <li className="flex items-start gap-3">
                   <Phone className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
                   <a href="tel:+912246182371" className="text-white/70 hover:text-primary transition-colors">
-                    +91 22 4618 2371
+                    +91 8200 801 802
                   </a>
                 </li>
                 <li className="flex items-start gap-3">
                   <Mail className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
-                  <span className="text-white/70">info@signaturecloverdale.com</span>
+                  <span className="text-white/70">contact@elaris.consulting</span>
                 </li>
               </ul>
             </div>
@@ -99,8 +99,8 @@ const Footer = () => {
             <div>
               <h3 className="text-xl font-bold mb-6 font-serif">About Developer</h3>
               <p className="text-white/70 mb-4">
-                <strong className="text-white">Signature Global</strong> is a top Indian real estate 
-                development firm with rich history, delivering affordable range of luxury housing 
+                <strong className="text-white">Signature Global</strong> is a top Indian real estate
+                development firm with rich history, delivering affordable range of luxury housing
                 projects across the nation.
               </p>
               <p className="text-white/70 text-sm">
@@ -132,9 +132,9 @@ const Footer = () => {
             {/* Disclaimer */}
             <div className="mt-8 text-xs text-white/50 text-center max-w-4xl mx-auto">
               <p>
-                <strong>Disclaimer:</strong> We are an authorised marketing partner for this project. 
-                Provided content is given by respective owners and this website and content is for 
-                information purpose only. Prices mentioned are subject to change without prior notice. 
+                <strong>Disclaimer:</strong> We are an authorised marketing partner for this project.
+                Provided content is given by respective owners and this website and content is for
+                information purpose only. Prices mentioned are subject to change without prior notice.
                 Properties mentioned are subject to availability.
               </p>
             </div>

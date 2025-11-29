@@ -1,5 +1,6 @@
 import { Home, Maximize, IndianRupee, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import DownloadBrochureModal from "@/components/DownloadBrochureModal";
 
 const Pricing = () => {
   const pricingData = [
@@ -71,16 +72,16 @@ const Pricing = () => {
                 <div className="bg-gradient-gold w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
                   <Home className="w-8 h-8 text-white" />
                 </div>
-                
+
                 <h3 className="text-3xl font-bold text-foreground mb-4 font-serif">
                   {item.type}
                 </h3>
-                
+
                 <div className="flex items-center justify-center gap-2 text-muted-foreground mb-4">
                   <Maximize className="w-4 h-4" />
                   <span className="text-lg">{item.area}</span>
                 </div>
-                
+
                 <div className="flex items-center justify-center gap-2 mb-6">
                   <IndianRupee className="w-6 h-6 text-primary" />
                   <span className="text-2xl font-bold text-primary">{item.price}</span>
@@ -91,9 +92,11 @@ const Pricing = () => {
                     <FileText className="w-4 h-4" />
                     Price Breakup
                   </Button>
-                  <Button className="btn-gold w-full">
-                    Get Best Quote
-                  </Button>
+                  <DownloadBrochureModal title="Get Best Quote">
+                    <Button className="btn-gold w-full">
+                      Get Best Quote
+                    </Button>
+                  </DownloadBrochureModal>
                 </div>
               </div>
             ))}
@@ -124,7 +127,9 @@ const Pricing = () => {
                   className="w-full rounded-xl mb-4 transition-transform duration-300 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl flex items-center justify-center">
-                  <Button className="btn-gold">Download Costing</Button>
+                  <DownloadBrochureModal title="Download Costing Details">
+                    <Button className="btn-gold">Download Costing</Button>
+                  </DownloadBrochureModal>
                 </div>
               </div>
               <h3 className="text-xl font-bold text-center font-serif">Costing Details</h3>

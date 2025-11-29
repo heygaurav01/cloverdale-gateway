@@ -64,7 +64,7 @@ const Location = () => {
             <div className="premium-card p-0 overflow-hidden">
               <div className="h-96 w-full bg-muted flex items-center justify-center">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3508.232!2d77.0467!3d28.4089!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDI0JzMyLjAiTiA3N8KwMDInNDguMSJF!5e0!3m2!1sen!2sin!4v1234567890"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3509.6056021781737!2d77.02436798774318!3d28.40097791337356!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d23006002c8bd%3A0x90c91f596190164e!2sSignature%20Global%20Cloverdale%20SPR!5e0!3m2!1sen!2sin!4v1764323452595!5m2!1sen!2sin"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
@@ -123,7 +123,7 @@ const Location = () => {
                 ))}
               </div>
               <p className="text-muted-foreground mt-6 max-w-2xl mx-auto">
-                Commute hassle-free with excellent connectivity to major roads, highways, and transport hubs. 
+                Commute hassle-free with excellent connectivity to major roads, highways, and transport hubs.
                 Everything you need is just minutes away from Signature Cloverdale.
               </p>
             </div>

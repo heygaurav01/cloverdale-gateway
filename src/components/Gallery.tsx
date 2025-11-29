@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import DownloadBrochureModal from "@/components/DownloadBrochureModal";
 
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
@@ -70,12 +71,14 @@ const Gallery = () => {
                 <div className="text-center md:text-left">
                   <h3 className="text-3xl font-bold mb-4 font-serif">Take a Virtual Tour</h3>
                   <p className="text-muted-foreground text-lg mb-6">
-                    Experience Signature Cloverdale from the comfort of your home. Take an immersive 
+                    Experience Signature Cloverdale from the comfort of your home. Take an immersive
                     virtual tour and explore every corner of this magnificent property.
                   </p>
-                  <button className="btn-gold">
-                    Start Virtual Site Visit
-                  </button>
+                  <DownloadBrochureModal title="Start Virtual Site Visit">
+                    <button className="btn-gold">
+                      Start Virtual Site Visit
+                    </button>
+                  </DownloadBrochureModal>
                 </div>
               </div>
             </div>

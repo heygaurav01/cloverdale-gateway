@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { ChevronDown, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,6 +14,7 @@ import { useToast } from "@/hooks/use-toast";
 
 const Hero = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [formData, setFormData] = useState({
     name: "",
@@ -21,7 +23,7 @@ const Hero = () => {
     email: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   const heroImages = [
     "https://www.signatureglobalcloverdales.com/assets/img/desk_ban_1.webp",
     "https://www.signatureglobalcloverdales.com/assets/img/desk_ban_2.webp",
@@ -36,7 +38,7 @@ const Hero = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.name || !formData.phone) {
       toast({
         title: "Required fields missing",
@@ -46,8 +48,18 @@ const Hero = () => {
       return;
     }
 
+    // Phone validation
+    if (!/^\d{10}$/.test(formData.phone)) {
+      toast({
+        title: "Invalid Phone Number",
+        description: "Please enter a valid 10-digit phone number",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
-    
+
     setTimeout(() => {
       toast({
         title: "Registration Successful!",
@@ -55,6 +67,7 @@ const Hero = () => {
       });
       setFormData({ name: "", countryCode: "+91", phone: "", email: "" });
       setIsSubmitting(false);
+      navigate("/thank-you.html");
     }, 1000);
   };
 
@@ -68,9 +81,8 @@ const Hero = () => {
       {heroImages.map((image, index) => (
         <div
           key={index}
-          className={`absolute inset-0 transition-opacity duration-1000 ${
-            index === currentSlide ? "opacity-100" : "opacity-0"
-          }`}
+          className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? "opacity-100" : "opacity-0"
+            }`}
         >
           <img
             src={image}
@@ -98,7 +110,7 @@ const Hero = () => {
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4 font-serif">
               Signature Cloverdale
             </h1>
-            
+
             <p className="text-xl md:text-2xl mb-6 text-white/90">
               At Sector 71, Gurugram by Signature Global Builder
             </p>
@@ -135,12 +147,12 @@ const Hero = () => {
               <a href="tel:+912246182371">
                 <Button size="lg" className="btn-gold text-lg px-8 py-6 gap-2 w-full sm:w-auto">
                   <Phone className="w-5 h-5" />
-                  +91 22 4618 2371
+                  +91 8200 801 802
                 </Button>
               </a>
               <a href="https://wa.me/912246182371" target="_blank" rel="noopener noreferrer">
-                <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   className="bg-[#25D366] hover:bg-[#20BA5A] text-white text-lg px-8 py-6 gap-2 w-full sm:w-auto"
                 >
                   WhatsApp
@@ -191,9 +203,13 @@ const Hero = () => {
                     type="tel"
                     placeholder="Mobile No *"
                     value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    onChange={(e) => {
+                      const value = e.target.value.replace(/\D/g, "").slice(0, 10);
+                      setFormData({ ...formData, phone: value });
+                    }}
                     className="h-12 border-border/50 col-span-2 text-base"
                     required
+                    maxLength={10}
                   />
                 </div>
 
@@ -231,7 +247,7 @@ const Hero = () => {
         </div>
 
         {/* Scroll Indicator */}
-        <div 
+        <div
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce cursor-pointer"
           onClick={scrollDown}
         >
@@ -245,9 +261,8 @@ const Hero = () => {
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              index === currentSlide ? "bg-primary w-8" : "bg-white/50"
-            }`}
+            className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentSlide ? "bg-primary w-8" : "bg-white/50"
+              }`}
           />
         ))}
       </div>

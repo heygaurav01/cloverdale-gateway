@@ -1,5 +1,6 @@
 import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import DownloadBrochureModal from "@/components/DownloadBrochureModal";
 
 const Overview = () => {
   const highlights = [
@@ -42,15 +43,15 @@ const Overview = () => {
                   Redefining Luxury Living in Gurugram
                 </h3>
                 <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
-                  Signature Cloverdale is a lavish residential elevation nestled in Sector 71, Gurugram. 
-                  The esteemed property presents 3, 3.5, 4.5 BHK lavishly furnished apartments. There are 
-                  a total of 6 high-rise towers providing flats that are opulent and reflect elegance, as 
+                  Signature Cloverdale is a lavish residential elevation nestled in Sector 71, Gurugram.
+                  The esteemed property presents 3, 3.5, 4.5 BHK lavishly furnished apartments. There are
+                  a total of 6 high-rise towers providing flats that are opulent and reflect elegance, as
                   they come with branded interiors and fixtures.
                 </p>
                 <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
-                  The project's spacious layout and open spaces enhance a naturalistic lifestyle. These 
-                  limited inventories also come with contemporary finishes and modern amenities. Experience 
-                  relaxing and astounding facilities including a clubhouse, swimming pool, gymnasium, 
+                  The project's spacious layout and open spaces enhance a naturalistic lifestyle. These
+                  limited inventories also come with contemporary finishes and modern amenities. Experience
+                  relaxing and astounding facilities including a clubhouse, swimming pool, gymnasium,
                   landscaped gardens, and much more.
                 </p>
 
@@ -64,9 +65,11 @@ const Overview = () => {
                   ))}
                 </div>
 
-                <Button className="btn-gold w-full sm:w-auto">
-                  Download Complete Details
-                </Button>
+                <DownloadBrochureModal title="Download Complete Details">
+                  <Button className="btn-gold w-full sm:w-auto">
+                    Download Complete Details
+                  </Button>
+                </DownloadBrochureModal>
               </div>
             </div>
           </div>
@@ -75,10 +78,10 @@ const Overview = () => {
           <div className="mt-16 premium-card animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
             <h3 className="text-2xl font-bold mb-6 text-center font-serif">Strategic Location Advantages</h3>
             <p className="text-muted-foreground text-lg text-center max-w-4xl mx-auto leading-relaxed">
-              The project is strategically positioned adjacent to Southern Peripheral Road, making it furthermore 
-              appealing. Social amenities nearby include Tau Devilal Stadium, SGT University, Signature Advanced 
-              Super Speciality Hospital, Drona Public School, and many more. Commute hassle-free as there are 
-              prominent roads, railway, and bus networks including National Highway, Toll Plaza, IGI Airport, 
+              The project is strategically positioned adjacent to Southern Peripheral Road, making it furthermore
+              appealing. Social amenities nearby include Tau Devilal Stadium, SGT University, Signature Advanced
+              Super Speciality Hospital, Drona Public School, and many more. Commute hassle-free as there are
+              prominent roads, railway, and bus networks including National Highway, Toll Plaza, IGI Airport,
               Vatika Chowk, Subhash Chowk, Hero Honda Chowk, Golf Course Extension Road, and more.
             </p>
           </div>

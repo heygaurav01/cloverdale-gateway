@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Phone, Mail, MessageSquare, User, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,6 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 
 const ContactForm = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -17,7 +19,7 @@ const ContactForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Basic validation
     if (!formData.name || !formData.phone) {
       toast({
@@ -28,17 +30,51 @@ const ContactForm = () => {
       return;
     }
 
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
+    // Phone validation
+    if (!/^\d{10}$/.test(formData.phone)) {
       toast({
-        title: "Enquiry Submitted Successfully!",
-        description: "Our team will contact you shortly.",
+        title: "Invalid Phone Number",
+        description: "Please enter a valid 10-digit phone number",
+        variant: "destructive",
       });
-      setFormData({ name: "", email: "", phone: "", message: "" });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("https://api.elaris.ltd/api/api/request", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+        }),
+      });
+
+      if (response.ok) {
+        toast({
+          title: "Enquiry Submitted Successfully!",
+          description: "Our team will contact you shortly.",
+        });
+        setFormData({ name: "", email: "", phone: "", message: "" });
+        navigate("/thank-you.html");
+      } else {
+        throw new Error("Failed to submit enquiry");
+      }
+    } catch (error) {
+      toast({
+        title: "Submission Failed",
+        description: "There was an error submitting your enquiry. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -107,10 +143,14 @@ const ContactForm = () => {
                         type="tel"
                         name="phone"
                         value={formData.phone}
-                        onChange={handleChange}
+                        onChange={(e) => {
+                          const value = e.target.value.replace(/\D/g, "").slice(0, 10);
+                          setFormData({ ...formData, phone: value });
+                        }}
                         placeholder="+91 XXXXX XXXXX"
                         className="pl-10 h-12 border-border/50"
                         required
+                        maxLength={10}
                       />
                     </div>
                   </div>
@@ -161,7 +201,7 @@ const ContactForm = () => {
                     </div>
                     <div>
                       <p className="text-sm opacity-90">Call Us Now</p>
-                      <p className="text-xl font-semibold">+91 22 4618 2371</p>
+                      <p className="text-xl font-semibold">+91 8200 801 802</p>
                     </div>
                   </a>
                 </div>
@@ -201,7 +241,7 @@ const ContactForm = () => {
                   <strong>RERA No:</strong> RC/REP/HARERA/GGM/955/687/2025/58
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  All projects of Signature Global including Signature Cloverdale are registered 
+                  All projects of Signature Global including Signature Cloverdale are registered
                   under Government of India RERA Act 2016.
                 </p>
               </div>
