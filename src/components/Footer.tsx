@@ -118,13 +118,13 @@ const Footer = () => {
               </p>
               <div className="flex gap-6 text-sm">
                 <a href="#" className="text-white/70 hover:text-primary transition-colors">
-                  Terms & Conditions
+
                 </a>
-                <a href="#" className="text-white/70 hover:text-primary transition-colors">
+                <a href="/Disclaimer.html" className="text-white/70 hover:text-primary transition-colors">
                   Privacy Policy
                 </a>
                 <a href="#" className="text-white/70 hover:text-primary transition-colors">
-                  Cookies Policy
+
                 </a>
               </div>
             </div>

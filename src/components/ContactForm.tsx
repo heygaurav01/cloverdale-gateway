@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Phone, Mail, MessageSquare, User, Send } from "lucide-react";
+import { Phone, Mail, User, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -13,7 +13,6 @@ const ContactForm = () => {
     name: "",
     email: "",
     phone: "",
-    message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -52,7 +51,6 @@ const ContactForm = () => {
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
-          message: formData.message,
         }),
       });
 
@@ -61,7 +59,7 @@ const ContactForm = () => {
           title: "Enquiry Submitted Successfully!",
           description: "Our team will contact you shortly.",
         });
-        setFormData({ name: "", email: "", phone: "", message: "" });
+        setFormData({ name: "", email: "", phone: "" });
         navigate("/thank-you.html");
       } else {
         throw new Error("Failed to submit enquiry");
@@ -155,21 +153,7 @@ const ContactForm = () => {
                     </div>
                   </div>
 
-                  <div>
-                    <label className="block text-sm font-semibold mb-2 text-foreground">
-                      Message / Requirements
-                    </label>
-                    <div className="relative">
-                      <MessageSquare className="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
-                      <Textarea
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        placeholder="Tell us about your requirements..."
-                        className="pl-10 min-h-32 border-border/50"
-                      />
-                    </div>
-                  </div>
+
 
                   <Button
                     type="submit"
@@ -236,9 +220,9 @@ const ContactForm = () => {
 
               {/* RERA Information */}
               <div className="premium-card bg-secondary">
-                <h3 className="text-lg font-bold mb-3 text-foreground">RERA Information</h3>
+                <h3 className="text-lg font-bold mb-3 text-foreground">PROJECT RERA Information</h3>
                 <p className="text-sm text-muted-foreground mb-2">
-                  <strong>RERA No:</strong> RC/REP/HARERA/GGM/955/687/2025/58
+                  <strong>PROJECT RERA No:</strong>GGM/955/687/2025/58 https://haryanarera.gov.in/
                 </p>
                 <p className="text-xs text-muted-foreground">
                   All projects of Signature Global including Signature Cloverdale are registered
