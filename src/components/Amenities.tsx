@@ -1,17 +1,21 @@
-import { 
-  Home, 
-  Waves, 
-  Dumbbell, 
-  TreePine, 
-  Baby, 
-  Gamepad2, 
-  Users, 
-  Shield, 
+import {
+  Home,
+  Waves,
+  Dumbbell,
+  TreePine,
+  Baby,
+  Gamepad2,
+  Users,
+  Shield,
   Zap,
   BookOpen,
   Heart,
   Footprints
 } from "lucide-react";
+
+import yogaDeckImg from "../assets/images/yoga-deck.png";
+import walkingTrailsImg from "../assets/images/walking-trails.png";
+import seniorZoneImg from "../assets/images/senior-citizen-zone.png";
 
 const Amenities = () => {
   const amenities = [
@@ -63,17 +67,17 @@ const Amenities = () => {
     {
       icon: Heart,
       name: "Yoga Deck",
-      image: null,
+      image: yogaDeckImg,
     },
     {
       icon: Footprints,
       name: "Walking Trails",
-      image: null,
+      image: walkingTrailsImg,
     },
     {
       icon: BookOpen,
       name: "Senior Citizen Zone",
-      image: null,
+      image: seniorZoneImg,
     },
   ];
 
@@ -125,8 +129,8 @@ const Amenities = () => {
           <div className="mt-16 text-center animate-fade-in-up">
             <div className="premium-card inline-block">
               <p className="text-lg text-muted-foreground max-w-3xl">
-                Every amenity at Signature Cloverdale is carefully curated to provide you with a lifestyle 
-                that's not just comfortable, but truly extraordinary. From fitness facilities to recreational 
+                Every amenity at Signature Cloverdale is carefully curated to provide you with a lifestyle
+                that's not just comfortable, but truly extraordinary. From fitness facilities to recreational
                 spaces, we've thought of everything to make your life easier and more enjoyable.
               </p>
             </div>

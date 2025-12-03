@@ -71,7 +71,7 @@ export const submitFormData = async (
             name: formData.name,
             phone: `${formData.countryCode}${formData.phone}`,
             email: formData.email,
-            promotion_code: "12UJ7BNBD_ms6g==",
+            promotion_code: "cOWNz1ZlckvsOA==",
             ip_address: userIP,
             ...(formData.message ? { message: formData.message } : {}),
             ...(utmParams.utmCampaign ? { utm_campaign: utmParams.utmCampaign } : {}),

@@ -121,7 +121,7 @@ const Footer = () => {
 
                 </a>
                 <a href="/Disclaimer.html" className="text-white/70 hover:text-primary transition-colors">
-                  Privacy Policy
+                  Disclaimer & Privacy Policy
                 </a>
                 <a href="#" className="text-white/70 hover:text-primary transition-colors">
 
