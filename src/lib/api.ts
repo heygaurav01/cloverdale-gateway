@@ -79,7 +79,7 @@ export const submitFormData = async (
             ...(utmParams.utmMedium ? { utm_medium: utmParams.utmMedium } : {}),
         };
 
-        const response = await fetch("http://localhost:4000/api/request", {
+        const response = await fetch("https://api.elaris.ltd/api/request", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

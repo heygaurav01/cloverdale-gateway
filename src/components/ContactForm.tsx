@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { submitFormData } from "@/lib/api";
 
 const ContactForm = () => {
   const { toast } = useToast();
@@ -42,19 +43,14 @@ const ContactForm = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("https://api.elaris.ltd/api/api/request", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-        }),
+      const result = await submitFormData({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        countryCode: "+91", // Defaulting as it's not in the form state but required by interface
       });
 
-      if (response.ok) {
+      if (result.success) {
         toast({
           title: "Enquiry Submitted Successfully!",
           description: "Our team will contact you shortly.",
@@ -62,7 +58,7 @@ const ContactForm = () => {
         setFormData({ name: "", email: "", phone: "" });
         navigate("/thank-you.html");
       } else {
-        throw new Error("Failed to submit enquiry");
+        throw new Error(result.message);
       }
     } catch (error) {
       toast({

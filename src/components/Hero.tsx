@@ -3,14 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { ChevronDown, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import { useToast } from "@/hooks/use-toast";
+import { submitFormData } from "@/lib/api";
 
 const Hero = () => {
   const { toast } = useToast();
@@ -18,7 +13,6 @@ const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [formData, setFormData] = useState({
     name: "",
-    countryCode: "+91",
     phone: "",
     email: "",
   });
@@ -60,15 +54,33 @@ const Hero = () => {
 
     setIsSubmitting(true);
 
-    setTimeout(() => {
-      toast({
-        title: "Registration Successful!",
-        description: "Our team will contact you shortly with exclusive offers.",
+    try {
+      const result = await submitFormData({
+        name: formData.name,
+        countryCode: "+91",
+        phone: formData.phone,
+        email: formData.email,
       });
-      setFormData({ name: "", countryCode: "+91", phone: "", email: "" });
+
+      if (result.success) {
+        toast({
+          title: "Registration Successful!",
+          description: "Our team will contact you shortly with exclusive offers.",
+        });
+        setFormData({ name: "", phone: "", email: "" });
+        navigate("/thank-you.html");
+      } else {
+        throw new Error(result.message);
+      }
+    } catch (error) {
+      toast({
+        title: "Submission Failed",
+        description: "There was an error submitting your registration. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
       setIsSubmitting(false);
-      navigate("/thank-you.html");
-    }, 1000);
+    }
   };
 
   const scrollDown = () => {
@@ -183,22 +195,7 @@ const Hero = () => {
                   />
                 </div>
 
-                <div className="grid grid-cols-3 gap-2">
-                  <Select
-                    value={formData.countryCode}
-                    onValueChange={(value) => setFormData({ ...formData, countryCode: value })}
-                  >
-                    <SelectTrigger className="h-12 border-border/50">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="+91">🇮🇳 +91</SelectItem>
-                      <SelectItem value="+1">🇺🇸 +1</SelectItem>
-                      <SelectItem value="+44">🇬🇧 +44</SelectItem>
-                      <SelectItem value="+971">🇦🇪 +971</SelectItem>
-                      <SelectItem value="+65">🇸🇬 +65</SelectItem>
-                    </SelectContent>
-                  </Select>
+                <div className="grid grid-cols-1 gap-2">
                   <Input
                     type="tel"
                     placeholder="Mobile No *"
@@ -207,7 +204,7 @@ const Hero = () => {
                       const value = e.target.value.replace(/\D/g, "").slice(0, 10);
                       setFormData({ ...formData, phone: value });
                     }}
-                    className="h-12 border-border/50 col-span-2 text-base"
+                    className="h-12 border-border/50 text-base"
                     required
                     maxLength={10}
                   />
